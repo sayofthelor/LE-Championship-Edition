@@ -35,6 +35,18 @@ enum abstract Action(String) to String from String
 	var NOTE_LEFT_R = "note_left-release";
 	var NOTE_RIGHT_R = "note_right-release";
 	var NOTE_DOWN_R = "note_down-release";
+	var P2_NOTE_UP = "note_up";
+	var P2_NOTE_LEFT = "p2_note_left";
+	var P2_NOTE_RIGHT = "p2_note_right";
+	var P2_NOTE_DOWN = "p2_note_down";
+	var P2_NOTE_UP_P = "p2_note_up-press";
+	var P2_NOTE_LEFT_P = "p2_note_left-press";
+	var P2_NOTE_RIGHT_P = "p2_note_right-press";
+	var P2_NOTE_DOWN_P = "p2_note_down-press";
+	var P2_NOTE_UP_R = "p2_note_up-release";
+	var P2_NOTE_LEFT_R = "p2_note_left-release";
+	var P2_NOTE_RIGHT_R = "p2_note_right-release";
+	var P2_NOTE_DOWN_R = "p2_note_down-release";
 	var ACCEPT = "accept";
 	var BACK = "back";
 	var PAUSE = "pause";
@@ -62,6 +74,10 @@ enum Control
 	NOTE_LEFT;
 	NOTE_RIGHT;
 	NOTE_DOWN;
+	P2_NOTE_UP;
+	P2_NOTE_LEFT;
+	P2_NOTE_RIGHT;
+	P2_NOTE_DOWN;
 	RESET;
 	ACCEPT;
 	BACK;
@@ -106,6 +122,18 @@ class Controls extends FlxActionSet
 	var _note_leftR = new FlxActionDigital(Action.NOTE_LEFT_R);
 	var _note_rightR = new FlxActionDigital(Action.NOTE_RIGHT_R);
 	var _note_downR = new FlxActionDigital(Action.NOTE_DOWN_R);
+	var _p2_note_up = new FlxActionDigital(Action.P2_NOTE_UP);
+	var _p2_note_left = new FlxActionDigital(Action.P2_NOTE_LEFT);
+	var _p2_note_right = new FlxActionDigital(Action.P2_NOTE_RIGHT);
+	var _p2_note_down = new FlxActionDigital(Action.P2_NOTE_DOWN);
+	var _p2_note_upP = new FlxActionDigital(Action.P2_NOTE_UP_P);
+	var _p2_note_leftP = new FlxActionDigital(Action.P2_NOTE_LEFT_P);
+	var _p2_note_rightP = new FlxActionDigital(Action.P2_NOTE_RIGHT_P);
+	var _p2_note_downP = new FlxActionDigital(Action.P2_NOTE_DOWN_P);
+	var _p2_note_upR = new FlxActionDigital(Action.P2_NOTE_UP_R);
+	var _p2_note_leftR = new FlxActionDigital(Action.P2_NOTE_LEFT_R);
+	var _p2_note_rightR = new FlxActionDigital(Action.P2_NOTE_RIGHT_R);
+	var _p2_note_downR = new FlxActionDigital(Action.P2_NOTE_DOWN_R);
 	var _accept = new FlxActionDigital(Action.ACCEPT);
 	var _back = new FlxActionDigital(Action.BACK);
 	var _pause = new FlxActionDigital(Action.PAUSE);
@@ -236,6 +264,66 @@ class Controls extends FlxActionSet
 	inline function get_NOTE_DOWN_R()
 		return _note_downR.check();
 
+	public var P2_NOTE_UP(get, never):Bool;
+
+	inline function get_P2_NOTE_UP()
+		return _p2_note_up.check();
+
+	public var P2_NOTE_LEFT(get, never):Bool;
+
+	inline function get_P2_NOTE_LEFT()
+		return _p2_note_left.check();
+
+	public var P2_NOTE_RIGHT(get, never):Bool;
+
+	inline function get_P2_NOTE_RIGHT()
+		return _p2_note_right.check();
+
+	public var P2_NOTE_DOWN(get, never):Bool;
+
+	inline function get_P2_NOTE_DOWN()
+		return _p2_note_down.check();
+
+	public var P2_NOTE_UP_P(get, never):Bool;
+
+	inline function get_P2_NOTE_UP_P()
+		return _p2_note_upP.check();
+
+	public var P2_NOTE_LEFT_P(get, never):Bool;
+
+	inline function get_P2_NOTE_LEFT_P()
+		return _p2_note_leftP.check();
+
+	public var P2_NOTE_RIGHT_P(get, never):Bool;
+
+	inline function get_P2_NOTE_RIGHT_P()
+		return _p2_note_rightP.check();
+
+	public var P2_NOTE_DOWN_P(get, never):Bool;
+
+	inline function get_P2_NOTE_DOWN_P()
+		return _p2_note_downP.check();
+
+	public var P2_NOTE_UP_R(get, never):Bool;
+
+	inline function get_P2_NOTE_UP_R()
+		return _p2_note_upR.check();
+
+	public var P2_NOTE_LEFT_R(get, never):Bool;
+
+	inline function get_P2_NOTE_LEFT_R()
+		return _p2_note_leftR.check();
+
+	public var P2_NOTE_RIGHT_R(get, never):Bool;
+
+	inline function get_P2_NOTE_RIGHT_R()
+		return _p2_note_rightR.check();
+
+	public var P2_NOTE_DOWN_R(get, never):Bool;
+
+	inline function get_P2_NOTE_DOWN_R()
+		return _p2_note_downR.check();
+
 	public var ACCEPT(get, never):Bool;
 
 	inline function get_ACCEPT()
@@ -284,6 +372,18 @@ class Controls extends FlxActionSet
 		add(_note_leftR);
 		add(_note_rightR);
 		add(_note_downR);
+		add(_p2_note_up);
+		add(_p2_note_left);
+		add(_p2_note_right);
+		add(_p2_note_down);
+		add(_p2_note_upP);
+		add(_p2_note_leftP);
+		add(_p2_note_rightP);
+		add(_p2_note_downP);
+		add(_p2_note_upR);
+		add(_p2_note_leftR);
+		add(_p2_note_rightR);
+		add(_p2_note_downR);
 		add(_accept);
 		add(_back);
 		add(_pause);
@@ -338,6 +438,10 @@ class Controls extends FlxActionSet
 			case NOTE_DOWN: _note_down;
 			case NOTE_LEFT: _note_left;
 			case NOTE_RIGHT: _note_right;
+			case P2_NOTE_UP: _p2_note_up;
+			case P2_NOTE_DOWN: _p2_note_down;
+			case P2_NOTE_LEFT: _p2_note_left;
+			case P2_NOTE_RIGHT: _p2_note_right;
 			case ACCEPT: _accept;
 			case BACK: _back;
 			case PAUSE: _pause;
@@ -393,6 +497,22 @@ class Controls extends FlxActionSet
 				func(_note_down, PRESSED);
 				func(_note_downP, JUST_PRESSED);
 				func(_note_downR, JUST_RELEASED);
+			case P2_NOTE_UP:
+				func(_p2_note_up, PRESSED);
+				func(_p2_note_upP, JUST_PRESSED);
+				func(_p2_note_upR, JUST_RELEASED);
+			case P2_NOTE_LEFT:
+				func(_p2_note_left, PRESSED);
+				func(_p2_note_leftP, JUST_PRESSED);
+				func(_p2_note_leftR, JUST_RELEASED);
+			case P2_NOTE_RIGHT:
+				func(_p2_note_right, PRESSED);
+				func(_p2_note_rightP, JUST_PRESSED);
+				func(_p2_note_rightR, JUST_RELEASED);
+			case P2_NOTE_DOWN:
+				func(_p2_note_down, PRESSED);
+				func(_p2_note_downP, JUST_PRESSED);
+				func(_p2_note_downR, JUST_RELEASED);
 			case ACCEPT:
 				func(_accept, JUST_PRESSED);
 			case BACK:
@@ -538,6 +658,10 @@ class Controls extends FlxActionSet
 				inline bindKeys(Control.NOTE_DOWN, keysMap.get('note_down'));
 				inline bindKeys(Control.NOTE_LEFT, keysMap.get('note_left'));
 				inline bindKeys(Control.NOTE_RIGHT, keysMap.get('note_right'));
+				inline bindKeys(Control.P2_NOTE_UP, keysMap.get('p2_note_up'));
+				inline bindKeys(Control.P2_NOTE_DOWN, keysMap.get('p2_note_down'));
+				inline bindKeys(Control.P2_NOTE_LEFT, keysMap.get('p2_note_left'));
+				inline bindKeys(Control.P2_NOTE_RIGHT, keysMap.get('p2_note_right'));
 
 				inline bindKeys(Control.ACCEPT, keysMap.get('accept'));
 				inline bindKeys(Control.BACK, keysMap.get('back'));
@@ -552,6 +676,10 @@ class Controls extends FlxActionSet
 				inline bindKeys(Control.NOTE_DOWN, [S]);
 				inline bindKeys(Control.NOTE_LEFT, [A]);
 				inline bindKeys(Control.NOTE_RIGHT, [D]);
+				inline bindKeys(Control.P2_NOTE_UP, [Z]);
+				inline bindKeys(Control.P2_NOTE_DOWN, [X]);
+				inline bindKeys(Control.P2_NOTE_LEFT, [COMMA]);
+				inline bindKeys(Control.P2_NOTE_RIGHT, [PERIOD]);
 				inline bindKeys(Control.ACCEPT, [G, Z]);
 				inline bindKeys(Control.BACK, [H, X]);
 				inline bindKeys(Control.PAUSE, [ONE]);
@@ -565,6 +693,10 @@ class Controls extends FlxActionSet
 				inline bindKeys(Control.NOTE_DOWN, [FlxKey.DOWN]);
 				inline bindKeys(Control.NOTE_LEFT, [FlxKey.LEFT]);
 				inline bindKeys(Control.NOTE_RIGHT, [FlxKey.RIGHT]);
+				inline bindKeys(Control.P2_NOTE_UP, [Z]);
+				inline bindKeys(Control.P2_NOTE_DOWN, [X]);
+				inline bindKeys(Control.P2_NOTE_LEFT, [COMMA]);
+				inline bindKeys(Control.P2_NOTE_RIGHT, [PERIOD]);
 				inline bindKeys(Control.ACCEPT, [O]);
 				inline bindKeys(Control.BACK, [P]);
 				inline bindKeys(Control.PAUSE, [ENTER]);

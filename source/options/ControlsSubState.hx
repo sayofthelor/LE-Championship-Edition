@@ -36,11 +36,17 @@ class ControlsSubState extends MusicBeatSubstate {
 	private var bindLength:Int = 0;
 
 	var optionShit:Array<Dynamic> = [
-		[Locale.get("notesNCOText")],
+		[Locale.get("notesNCOText") + ": PLAYER 1"],
 		[Locale.get("leftNCOText"), 'note_left'],
 		[Locale.get("downNCOText"), 'note_down'],
 		[Locale.get("upNCOText"), 'note_up'],
 		[Locale.get("rightNCOText"), 'note_right'],
+		[''],
+		[Locale.get("notesNCOText") + ": PLAYER 2"],
+		[Locale.get("leftNCOText"), 'p2_note_left'],
+		[Locale.get("downNCOText"), 'p2_note_down'],
+		[Locale.get("upNCOText"), 'p2_note_up'],
+		[Locale.get("rightNCOText"), 'p2_note_right'],
 		[''],
 		[Locale.get("uiNCOText")],
 		[Locale.get("leftNCOText"), 'ui_left'],

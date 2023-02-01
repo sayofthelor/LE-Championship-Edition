@@ -6,6 +6,7 @@ import flixel.input.keyboard.FlxKey;
 import Controls;
 
 class ClientPrefs {
+	public static var CEMode:Bool = true;
 	public static var aspectRatio:String = '16:9';
 	public static var rainbowFPS:Bool = false;
 	public static var downScroll:Bool = false;
@@ -92,6 +93,11 @@ class ClientPrefs {
 		'note_down'		=> [S, DOWN],
 		'note_up'		=> [W, UP],
 		'note_right'	=> [D, RIGHT],
+
+		'p2_note_left' 	=> [Z, Q],
+		'p2_note_down'	=> [X, W],
+		'p2_note_up'	=> [COMMA, O],
+		'p2_note_right'	=> [PERIOD, P],
 		
 		'ui_left'		=> [A, LEFT],
 		'ui_down'		=> [S, DOWN],
