@@ -46,8 +46,16 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			false);
 		addOption(option);
 
+		
+		var option:Option = new Option('Downscroll (Left)', //Name
+			'If checked, notes go Down instead of Up, simple enough.', //Description
+			'downScrollP2', //Save data variable name
+			'bool', //Variable type
+			false); //Default value
+		addOption(option);
+		
 		//I'd suggest using "Downscroll" as an example for making your own option since it is the simplest here
-		var option:Option = new Option('Downscroll', //Name
+		var option:Option = new Option('Downscroll (Right)', //Name
 			'If checked, notes go Down instead of Up, simple enough.', //Description
 			'downScroll', //Save data variable name
 			'bool', //Variable type

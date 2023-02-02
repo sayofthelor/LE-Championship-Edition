@@ -216,6 +216,8 @@ class Note extends FlxSprite
 			alpha = 0.6;
 			multAlpha = 0.6;
 			if(ClientPrefs.downScroll) flipY = true;
+			if(noteData > 3 && ClientPrefs.downScroll && !ClientPrefs.downScrollP2) flipY = false;
+			if(noteData > 3 && !ClientPrefs.downScroll && ClientPrefs.downScrollP2) flipY = true;
 
 			offsetX += width / 2;
 			copyAngle = false;

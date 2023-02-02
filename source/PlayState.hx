@@ -1372,11 +1372,11 @@ class PlayState extends MusicBeatState
 		add(scoreTxt);
 		if (ClientPrefs.CEMode) {
 			scoreTxt.screenCenter(X);
-			scoreTxt.x -= FlxG.width / 4;
+			scoreTxt.x += FlxG.width / 4;
 		}
 
 		if (ClientPrefs.CEMode) {
-			scoreTxt2 = new FlxText(0, healthBarBG.y + 26, FlxG.width, "", 20);
+			scoreTxt2 = new FlxText(0, ClientPrefs.downScrollP2 ? healthBarBG.y + 26 : ClientPrefs.downScroll ? (FlxG.height * 0.89) + 26 : (FlxG.height * .11) + 26, FlxG.width, "", 20);
 			scoreTxt2.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 			scoreTxt2.scrollFactor.set();
 			scoreTxt2.borderSize = 1;
@@ -1384,7 +1384,7 @@ class PlayState extends MusicBeatState
 			if (!ClientPrefs.showScoreBar) scoreTxt2.visible = false;
 			add(scoreTxt2);
 			scoreTxt2.screenCenter(X);
-			scoreTxt2.x += FlxG.width / 4;
+			scoreTxt2.x -= FlxG.width / 4;
 		}
 
 		strumLineNotes.cameras = [camHUD];
@@ -2651,7 +2651,7 @@ class PlayState extends MusicBeatState
 			} else if(ratingName == '?' && !cpuUpdate) {
 				scoreTxt2.text = 'Combo: ' + combo2 + ' \\ Score: ' + songScore2 + ' \\ Combo Breaks: ' + songMisses2 + ' \\ Accuracy: 0% ';
 			} else if (!cpuUpdate) {
-				scoreTxt2.text = 'Combo: ' + combo2 + ' \\ Score: ' + songScore2 + ' \\ Combo Breaks: ' + songMisses2 + ' \\ Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%';
+				scoreTxt2.text = 'Combo: ' + combo2 + ' \\ Score: ' + songScore2 + ' \\ Combo Breaks: ' + songMisses2 + ' \\ Accuracy: ' + Highscore.floorDecimal(ratingPercent2 * 100, 2) + '%';
 			}
 
 			// if(ClientPrefs.scoreZoom && !miss && !cpuControlled && !cpuUpdate)
@@ -3192,7 +3192,9 @@ class PlayState extends MusicBeatState
 				case true:
 					babyArrow = new StrumNote(ClientPrefs.middleScroll ? STRUM_X_MIDDLESCROLL : STRUM_X, strumLine.y, i, player);
 			}
-			babyArrow.downScroll = ClientPrefs.downScroll;
+			babyArrow.downScroll = (player == 2) ? ClientPrefs.downScrollP2 : ClientPrefs.downScroll;
+			if (!ClientPrefs.downScrollP2 && player == 2) babyArrow.y = 50;
+			else if (player == 2) babyArrow.y = FlxG.height - 150;
 			if (!isStoryMode && !skipArrowStartTween)
 			{
 				//babyArrow.y -= 10;
@@ -4706,7 +4708,7 @@ class PlayState extends MusicBeatState
 		}
 
 		if(!practiceMode && !cpuControlled) {
-			songScore += score;
+			if (note.noteData < 4) songScore += score else songScore2 += score;
 			if(!note.ratingDisabled && note.noteData > 3)
 				{
 					songHits2++;
@@ -4825,10 +4827,8 @@ class PlayState extends MusicBeatState
 		}
 
 		if (ClientPrefs.CEMode) {
-			rating.screenCenter();
-			rating.x += (p2 ? -1 : 1) * (FlxG.width / 4);
-			noteDiffText.centerOnSprite(p2 ? laneunderlay2 : laneunderlay);
-			noteDiffText.y = rating.y + rating.height + 30;
+			rating.x = p2 ? playerStrums.members[4].x + 20 : playerStrums.members[0].x + 20;
+			rating.screenCenter(Y);
 		}
 
 		rating.updateHitbox();
@@ -5169,6 +5169,8 @@ class PlayState extends MusicBeatState
 
 		if (daNote.noteData > 3) totalPlayed2++ else totalPlayed++;
 		RecalculateRating(true);
+		RecalculateRating2(true);
+
 
 		var char:Character = boyfriend;
 		if(daNote.gfNote) {
@@ -5210,6 +5212,7 @@ class PlayState extends MusicBeatState
 			}
 			totalPlayed++;
 			RecalculateRating(true);
+			RecalculateRating2(true);
 
 			FlxG.sound.play(Paths.soundRandom('missnote', 1, 3), FlxG.random.float(0.1, 0.2));
 			// FlxG.sound.play(Paths.sound('missnote1'), 1, false);

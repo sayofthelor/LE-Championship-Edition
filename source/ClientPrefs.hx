@@ -10,6 +10,7 @@ class ClientPrefs {
 	public static var aspectRatio:String = '16:9';
 	public static var rainbowFPS:Bool = false;
 	public static var downScroll:Bool = false;
+	public static var downScrollP2:Bool = false;
 	public static var showLore:Bool = true;
 	public static var showMem:Bool = true;
 	public static var persistentCaching:Bool = false;
@@ -128,6 +129,7 @@ class ClientPrefs {
 		FlxG.save.data.locale = locale;
 		FlxG.save.data.ratingPosition = ratingPosition;
 		FlxG.save.data.downScroll = downScroll;
+		FlxG.save.data.downScrollP2 = downScrollP2;
 		FlxG.save.data.showMS = showMS;
 		FlxG.save.data.showLore = showLore;
 		FlxG.save.data.bopStyle = bopStyle;
@@ -200,6 +202,9 @@ class ClientPrefs {
 		}
 		if(FlxG.save.data.downScroll != null) {
 			downScroll = FlxG.save.data.downScroll;
+		}
+		if(FlxG.save.data.downScrollP2 != null) {
+			downScrollP2 = FlxG.save.data.downScrollP2;
 		}
 		if(FlxG.save.data.ratingPosition != null) {
 			ratingPosition = FlxG.save.data.ratingPosition;
