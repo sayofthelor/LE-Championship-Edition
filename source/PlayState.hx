@@ -4590,14 +4590,15 @@ class PlayState extends MusicBeatState
 			}
 			else
 			{
-				trace('WENT BACK TO FREEPLAY??');
-				WeekData.loadTheFirstEnabledMod();
-				cancelMusicFadeTween();
-				if(FlxTransitionableState.skipNextTransIn) {
-					CustomFadeTransition.nextCamera = null;
-				}
-				MusicBeatState.switchState(new FreeplayState());
-				FlxG.sound.playMusic(Paths.music('freakyMenu'));
+				// trace('WENT BACK TO FREEPLAY??');
+				// WeekData.loadTheFirstEnabledMod();
+				// cancelMusicFadeTween();
+				// if(FlxTransitionableState.skipNextTransIn) {
+				// 	CustomFadeTransition.nextCamera = null;
+				// }
+				// MusicBeatState.switchState(new FreeplayState());
+				// FlxG.sound.playMusic(Paths.music('freakyMenu'));
+				openSubState(new RankingSubState());
 				changedDifficulty = false;
 			}
 			transitioning = true;
