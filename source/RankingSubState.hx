@@ -21,7 +21,7 @@ class RankingSubState extends FlxSubState {
         add(scoreTxt1 = new FlxText(100, 0, 1280, "0").setFormat(Paths.font("vcr.ttf"), 48, 0xffffffff, "left"));
         add(scoreTxt2 = new FlxText(100, 0, 1280, "0").setFormat(Paths.font("vcr.ttf"), 48, 0xffffffff, "right"));
         add(confetti = new Confetti());
-        if (PlayState.instance.songScore < PlayState.instance.songScore2) confetti.emitter.x = 0;
+        if (PlayState.instance.songScore < PlayState.instance.songScore2) @:privateAccess confetti.emitter.x = 0;
         scoreTxt2.x = 1280 - scoreTxt2.width - 100;
         scoreTxt1.screenCenter(Y);
         scoreTxt2.screenCenter(Y);
