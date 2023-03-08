@@ -74,6 +74,13 @@
       "url": "https://github.com/Aidan63/linc_discord-rpc"
     },
     {
+      "name": "flixel-screenshot-plugin",
+      "type": "git",
+      "dir": null,
+      "ref": "master",
+      "url": "https://github.com/sayofthelor/flixel-screenshot-plugin"
+    },
+    {
       "name": "hscript-lore",
       "type": "git",
       "dir": null,
