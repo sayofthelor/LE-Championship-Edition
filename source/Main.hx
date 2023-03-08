@@ -125,7 +125,7 @@ class Main extends Sprite
 		FlxG.mouse.visible = false;
 		#end
 
-		FlxG.plugins.add(new screenshotplugin.ScrenShotPlugin());
+		FlxG.plugins.add(new screenshotplugin.ScreenShotPlugin());
 	
 
 		#if desktop
