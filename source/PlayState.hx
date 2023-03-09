@@ -177,6 +177,7 @@ class PlayState extends MusicBeatState
 	public var dad:Character = null;
 	public var gf:Character = null;
 	public var boyfriend:Boyfriend = null;
+	public var boyfriend2:Boyfriend = null;
 
 	public var notes:FlxTypedGroup<Note>;
 	public var unspawnNotes:Array<Note> = [];
@@ -1073,8 +1074,13 @@ class PlayState extends MusicBeatState
 
 		boyfriend = new Boyfriend(0, 0, SONG.player1);
 		startCharacterPos(boyfriend);
-		if (!ClientPrefs.optimization) boyfriendGroup.add(boyfriend);
 		startCharacterLua(boyfriend.curCharacter);
+
+		boyfriend2 = new Boyfriend(0, 0, SONG.player1);
+		startCharacterPos(boyfriend2);
+		boyfriend2.x -= boyfriend.width / 2;
+		if (!ClientPrefs.optimization) boyfriendGroup.add(boyfriend2);
+		if (!ClientPrefs.optimization) boyfriendGroup.add(boyfriend);
 
 		var camPos:FlxPoint = new FlxPoint(girlfriendCameraOffset[0], girlfriendCameraOffset[1]);
 		if(gf != null)
@@ -1474,6 +1480,7 @@ class PlayState extends MusicBeatState
 					FlxG.sound.play(Paths.soundRandom('thunder_', 1, 2));
 					if(gf != null) gf.playAnim('scared', true);
 					boyfriend.playAnim('scared', true);
+					boyfriend2.playAnim('scared', true);
 
 				case "winter-horrorland":
 					var blackScreen:FlxSprite = new FlxSprite().makeGraphic(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.BLACK);
@@ -2099,7 +2106,9 @@ class PlayState extends MusicBeatState
 				cutsceneHandler.timer(4.5, function()
 				{
 					boyfriend.playAnim('singUP', true);
+					boyfriend2.playAnim('singUP', true);
 					boyfriend.specialAnim = true;
+					boyfriend2.specialAnim = true;
 					FlxG.sound.play(Paths.sound('bfBeep'));
 				});
 
@@ -2406,6 +2415,7 @@ class PlayState extends MusicBeatState
 				if (tmr.loopsLeft % boyfriend.danceEveryNumBeats == 0 && boyfriend.animation.curAnim != null && !boyfriend.animation.curAnim.name.startsWith('sing') && !boyfriend.stunned)
 				{
 					boyfriend.dance();
+					boyfriend2.dance();
 				}
 				if (tmr.loopsLeft % dad.danceEveryNumBeats == 0 && dad.animation.curAnim != null && !dad.animation.curAnim.name.startsWith('sing') && !dad.stunned)
 				{
@@ -3687,6 +3697,7 @@ class PlayState extends MusicBeatState
 				keyShit();
 			} else if(boyfriend.animation.curAnim != null && boyfriend.holdTimer > Conductor.stepCrochet * (0.0011 / FlxG.sound.music.pitch) * boyfriend.singDuration && boyfriend.animation.curAnim.name.startsWith('sing') && !boyfriend.animation.curAnim.name.endsWith('miss')) {
 				boyfriend.dance();
+				boyfriend2.dance();
 				//boyfriend.animation.curAnim.finish();
 			}
 
@@ -5116,6 +5127,7 @@ class PlayState extends MusicBeatState
 			else if (boyfriend.animation.curAnim != null && boyfriend.holdTimer > Conductor.stepCrochet * (0.0011 / FlxG.sound.music.pitch) * boyfriend.singDuration && boyfriend.animation.curAnim.name.startsWith('sing') && !boyfriend.animation.curAnim.name.endsWith('miss'))
 			{
 				boyfriend.dance();
+				boyfriend2.dance();
 				//boyfriend.animation.curAnim.finish();
 			}
 		}
@@ -5178,10 +5190,11 @@ class PlayState extends MusicBeatState
 		if(daNote.gfNote) {
 			char = gf;
 		}
+		if (daNote.noteData > 3) char = boyfriend2;
 
 		if(char != null && !daNote.noMissAnimation && char.hasMissAnimations)
 		{
-			var animToPlay:String = singAnimations[Std.int(Math.abs(daNote.noteData))] + 'miss' + daNote.animSuffix;
+			var animToPlay:String = singAnimations[Std.int(Math.abs(daNote.noteData % 4))] + 'miss' + daNote.animSuffix;
 			char.playAnim(animToPlay, true);
 		}
 
@@ -5351,7 +5364,7 @@ class PlayState extends MusicBeatState
 			// health += note.hitHealth * healthGain;
 
 			if(!note.noAnimation) {
-				var animToPlay:String = singAnimations[Std.int(Math.abs(note.noteData))];
+				var animToPlay:String = singAnimations[Std.int(Math.abs(note.noteData % 4))];
 
 				if(note.gfNote)
 				{
@@ -5361,10 +5374,12 @@ class PlayState extends MusicBeatState
 						gf.holdTimer = 0;
 					}
 				}
-				else
+				else 
 				{
 					boyfriend.playAnim(animToPlay + note.animSuffix, true);
 					boyfriend.holdTimer = 0;
+					boyfriend2.playAnim(animToPlay + note.animSuffix, true);
+					boyfriend2.holdTimer = 0;
 				}
 
 				if(note.noteType == 'Hey!') {
@@ -5754,6 +5769,7 @@ class PlayState extends MusicBeatState
 		if (curBeat % boyfriend.danceEveryNumBeats == 0 && boyfriend.animation.curAnim != null && !boyfriend.animation.curAnim.name.startsWith('sing') && !boyfriend.stunned)
 		{
 			boyfriend.dance();
+			boyfriend2.dance();
 		}
 		if (curBeat % dad.danceEveryNumBeats == 0 && dad.animation.curAnim != null && !dad.animation.curAnim.name.startsWith('sing') && !dad.stunned)
 		{
