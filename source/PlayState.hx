@@ -4265,6 +4265,14 @@ class PlayState extends MusicBeatState
 				switch(charType) {
 					case 0:
 						if(boyfriend.curCharacter != value2) {
+							if(!boyfriendMap.exists(value2+"2")) {
+								var newBoyfriend:Boyfriend = new Boyfriend(0, 0, value2);
+								boyfriendMap.set(value2+"2", newBoyfriend);
+								boyfriendGroup.add(newBoyfriend);
+								startCharacterPos(newBoyfriend);
+								newBoyfriend.x -= (newBoyfriend.width / 2);
+								boyfriendMap[value2+"2"] = newBoyfriend;
+							}
 							if(!boyfriendMap.exists(value2)) {
 								addCharacterToList(value2, charType);
 							}
@@ -4272,10 +4280,15 @@ class PlayState extends MusicBeatState
 							var lastAlpha:Float = boyfriend.alpha;
 							boyfriend.alpha = 0.00001;
 							boyfriend = boyfriendMap.get(value2);
+							
+							var lastAlpha2:Float = boyfriend2.alpha;
+							boyfriend2.alpha = 0.00001;
+							boyfriend2 = boyfriendMap.get(value2+"2");
 							setOnHaxes('boyfriend', boyfriend);
 							callOnLuas("onChangeCharacter", ["bf"]);
 							callOnHaxes("onChangeCharacter", ["bf"]);
 							boyfriend.alpha = lastAlpha;
+							boyfriend2.alpha = 0.25;
 							iconP1.changeIcon(boyfriend.healthIcon, boyfriend.hasVictory);
 						}
 						setOnLuas('boyfriendName', boyfriend.curCharacter);
@@ -5435,7 +5448,7 @@ class PlayState extends MusicBeatState
 		if(ClientPrefs.noteSplashes && note != null) {
 			var strum:StrumNote = playerStrums.members[note.noteData];
 			if(strum != null) {
-				spawnNoteSplash(strum.x, strum.y, note.noteData, note);
+				spawnNoteSplash(strum.x, strum.y, note.noteData % 4, note);
 			}
 		}
 	}
